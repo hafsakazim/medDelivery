@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibiotics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-500 text-white flex justify-between">
+        <img src="images/ambulance_2866548.png" alt="" class="h-20 px-10 my-1">
+        <ul class="px-28 py-8 flex space-x-7 justify-end">
+            <li class="cursor-pointer"><a href="index.html" style="text-decoration: none;">Home</a></li>
+            <li class="cursor-pointer"><a href="login.html" style="text-decoration: none;">Login</a></li>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Sign Up
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="patient_registration.html">Patient</a></li>
+                    <li><a class="dropdown-item" href="delivery_registration.html">Delivery agent</a></li>
+                </ul>
+            </div>
+            <li class="cursor-pointer"><a class="dropdown-item" href="product.html">Products</a></li>
+            <li class="cursor-pointer"><a class="dropdown-item" href="cart.html">Cart (<span
+                        id="cart-count">0</span>)</a></li>
+            <li class="cursor-pointer">Profile</li>
+        </ul>
+    </nav>
+
+    <!-- Antibiotics Section -->
+    <section class="container mx-auto py-12">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Antibiotics</h2>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                <div class="p-4 bg-white shadow-lg">
+                    <img src="images/408x300-panadol-regular.avif" alt="Panadol">
+                    <h3 class="text-lg font-semibold text-center">Panadol</h3>
+                    <h4 class="text-lg font-medium">Rs 50</h4>
+                    <p class="text-gray-600">Panadol can be used for relieving fever and/or for the treatment of mild to
+                        moderate pain including headache, migraine, muscle ache, dysmenorrhea, sore throat, and pain of
+                        osteoarthritis.</p>
+                    <button class="btn btn-primary w-100 add-to-cart" data-product="Panadol" data-price="50">Add to
+                        Cart</button>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                <div class="p-4 bg-white shadow-lg">
+                    <img src="images/brufen.webp" alt="Brufen">
+                    <h3 class="text-lg font-semibold text-center">Brufen</h3>
+                    <h4 class="text-lg font-semibold">Rs 30</h4>
+                    <p class="text-gray-600">Ibuprofen is used to provide relief from mild, moderate, and severe pain,
+                        and reduction of fever and swelling.</p>
+                    <button class="btn btn-primary w-100 add-to-cart" data-product="Brufen" data-price="30">Add to
+                        Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Initialize the cart
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const product = button.getAttribute('data-product');
+                const price = parseFloat(button.getAttribute('data-price'));
+
+                // Add the product to the cart
+                cart.push({ product, price });
+
+                // Store cart in localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                // Update the cart count in the navbar
+                document.getElementById('cart-count').textContent = cart.length;
+
+                // Alert the product addition
+                alert(`${product} added to cart!`);
+            });
+        });
+
+        // Update cart count on page load
+        document.getElementById('cart-count').textContent = cart.length;
+    </script>
+</body>
+
+</html>
